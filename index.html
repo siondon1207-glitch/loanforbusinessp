@@ -1,23 +1,909 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      color: #334155;
+      background-color: #f8fafc;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+      color: #ffffff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0 0 15px 0;
+      letter-spacing: -0.05em;
+      line-height: 1.3;
+    }
+    
+    header p {
+      font-size: 1.15rem;
+      margin: 0 0 30px 0;
+      opacity: 0.9;
+    }
+    
+    nav {
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 10px;
+    }
+    
+    nav a {
+      color: #475569;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+    
+    nav a:hover {
+      color: #0f766e;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    section {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.02), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+      border: 1px solid #f1f5f9;
+    }
+    
+    h2 {
+      font-size: 1.6rem;
+      color: #0f172a;
+      border-left: 5px solid #0f766e;
+      padding-left: 15px;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    
+    p {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      color: #475569;
+      text-align: justify;
+    }
+    
+    .strong-highlight {
+      font-weight: 700;
+      color: #0f766e;
+      background-color: #f0fdfa;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #f97316;
+      color: #ffffff;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.2);
+    }
+    
+    .cta-button:hover {
+      background-color: #ea580c;
+    }
+    
+    .interactive-box {
+      background-color: #f0fdfa;
+      border: 1px solid #ccfbf1;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .interactive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .interactive-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: #334155;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #0f766e;
+    }
+    
+    .result-box {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 25px;
+      margin-top: 20px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.95rem;
+    }
+    
+    table th, table td {
+      border: 1px solid #e2e8f0;
+      padding: 12px 15px;
+      text-align: left;
+    }
+    
+    table th {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      font-weight: 600;
+    }
+    
+    .chart-container {
+      margin: 30px 0;
+      background-color: #f8fafc;
+      padding: 25px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .bar-row {
+      display: flex;
+      align-items: center;
+    }
+    
+    .bar-label {
+      width: 150px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .bar-wrapper {
+      flex-grow: 1;
+      background-color: #e2e8f0;
+      border-radius: 4px;
+      height: 24px;
+      overflow: hidden;
+    }
+    
+    .bar-fill {
+      background-color: #0f766e;
+      height: 100%;
+      border-radius: 4px;
+    }
+    
+    .bar-value {
+      width: 80px;
+      text-align: right;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0f766e;
+    }
+    
+    .faq-item {
+      border-bottom: 1px solid #e2e8f0;
+      padding: 15px 0;
+    }
+    
+    .faq-question {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #0f766e;
+      cursor: pointer;
+      padding: 5px 0;
+    }
+    
+    .faq-answer {
+      margin-top: 10px;
+      padding-left: 15px;
+      color: #475569;
+      display: none;
+    }
+    
+    .external-links {
+      background-color: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    .external-links a {
+      color: #475569;
+      text-decoration: underline;
+      margin: 0 15px;
+    }
+    
+    .external-links a:hover {
+      color: #0f766e;
+    }
+    
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    
+    footer p {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    
+    .badge-teal {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-right: 5px;
+    }
+  </style>
+
+  <!-- JSON-LD Structured Data for Naver and LLM Search Engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    "name": "2026 중진공정책자금 종합 지원 센터",
+    "image": "https://policy.reliabledone.com/images/meta-thumbnail.jpg",
+    "telephone": "1544-0000",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "서울특별시 영등포구 의사당대로 22",
+      "addressLocality": "영등포구",
+      "addressRegion": "서울특별시",
+      "postalCode": "07236",
+      "addressCountry": "KR"
+    },
+    "url": "https://policy.reliabledone.com",
+    "priceRange": "KRW",
+    "knowsAbout": ["중진공정책자금", "정부지원금", "중소기업 육성자금", "운전자금", "시설자금"],
+    "areaServed": [
+      "서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "수원", "성남", "고양", "용인", "부천", "안산", "남양주", "안양", "화성", "평택", "의정부", "파주", "시흥", "김포", "광명", "군포", "이천", "오산", "하남", "양주", "구리", "포천", "여주", "동두천", "과천", "가평", "양평", "청주", "충주", "제천", "천안", "공주", "보령", "아산", "서산", "논산", "계룡", "당진", "전주", "군산", "익산", "정읍", "남원", "김제", "여수", "순천", "나주", "광양", "담양", "목포", "포항", "경주", "김천", "안동", "구미", "영주", "영천", "상주", "문경", "경산", "창원", "진주", "통영", "사천", "김해", "밀양", "거제", "양산", "제주", "서귀포"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "중진공 정책자금 솔루션 및 컨설팅",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "신시장진출지원자금 신청 자가진단 및 맞춤 설계",
+            "description": "수출 강소기업 및 내수기업의 글로벌 시장 진출을 돕기 위한 운전자금 및 시설자금 맞춤형 한도 및 금리 시뮬레이션 솔루션"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "창업기반지원자금 종합 심층 컨설팅",
+            "description": "청년전용창업자금 및 일반 창업기반지원자금을 성공적으로 조달하기 위한 사업계획서 대면/비대면 코칭 프로그램"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "신성장기반자금 및 시설자금 한도 평가 대행",
+            "description": "공장 설립, 기계설비 도입 시 소요되는 대규모 시설투자 자금을 유리한 조건으로 융자받을 수 있도록 지원하는 전문 프로세스"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header id="상단">
+  <h1>2026년 중진공정책자금 종합 가이드 및 비대면 계산기 지원 시스템</h1>
+  <p>중소벤처기업진흥공단의 무담보, 저금리 융자 한도 예측과 전문 진단 컨설팅을 실시간으로 확인하세요</p>
+  <a href="#정밀신청폼" class="cta-button">무료 매칭 자가진단 신청</a>
+</header>
+
+<nav>
+  <div class="nav-container">
+    <a href="#제도안내">2026 중진공정책자금 소개</a>
+    <a href="#실시간진단">모의 진단기</a>
+    <a href="#상환계산">이자 계산기</a>
+    <a href="#분석표">종류 및 장단점 비교</a>
+    <a href="#자주묻는질문">자주 묻는 질문 FAQ</a>
+    <a href="#정밀신청폼">상담 신청</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <section id="제도안내">
+    <h2>2026년 중진공정책자금 분석 및 제도 개요</h2>
+    <p>
+      2026년도에 시행되는 중소벤처기업진흥공단의 <span class="strong-highlight">중진공정책자금</span> 제도는 시중 은행의 높은 금리 부담을 겪고 있는 유망 중소기업 및 예비 창업자들을 위해 마련된 정부 직접 융자 지원 사업입니다. 2026년 예산 배정 특징에 따르면 기술성과 미래 성장성이 높은 신규 법인 및 벤처 인증 기업에 한도가 집중되고 있으며, 이자 비용의 부담을 덜어주기 위해 기준금리 대비 우대 혜택을 확대하는 경향을 보이고 있습니다.
+    </p>
+    <p>
+      기본적으로 시설자금과 운전자금으로 구분되며, 기업이 위치한 지자체 및 산업군별 특별 가점에 따라 승인 한도 금액과 승인율이 다르게 산정됩니다. 중진공정책자금은 시중 은행의 대출 상품과 달리, 신용과 기술력을 종합적으로 평가하여 지원하기 때문에 담보력이 부족한 초기 스타트업 및 소상공인도 충분한 경쟁력을 갖춘다면 높은 금액의 정책 자금을 확보할 수 있는 장점을 가집니다.
+    </p>
+    <p>
+      최근 네이버, 구글, 유튜브, 트위터, 인스타그램, 페이스북, 카카오톡 채널과 같은 온라인 소셜 네트워크를 비롯하여 토스, 뱅크샐러드 등의 모바일 플랫폼과 연계된 핀테크 앱, 어플 솔루션들이 활성화되면서, 정책자금을 직접 자력으로 조회해 보거나 신청할 수 있는 온라인 다이렉트 창구 역시 크게 늘어났습니다. 그러나 여전히 복잡한 양식의 사업계획서 작성 및 현장 실사 대비의 어려움으로 인하여 전문 컨설팅 업체나 전문 행정 대행사의 도움을 받아 안전하게 가입 및 심사를 진행하려는 기업들도 점차 증가하고 있습니다.
+    </p>
+  </section>
+
+  <section id="실시간진단">
+    <h2>중진공정책자금 맞춤형 모의 자가진단 계산기</h2>
+    <p>
+      기업의 기본 정보를 입력하여 어떤 자금 종류에 매칭 가능한지, 그리고 예상되는 대출 가능 수준과 자금 한도를 대략적으로 모의 계산해보실 수 있는 자가진단 프로그램입니다. 아래 필수 선택 항목들을 빠짐없이 기입하여 시뮬레이션을 시작하십시오.
+    </p>
+    
+    <div class="interactive-box">
+      <div class="interactive-grid">
+        <div class="form-group">
+          <label for="diag-region">기업 소재 지역</label>
+          <select id="diag-region">
+            <option value="서울">서울특별시</option>
+            <option value="인천">인천광역시</option>
+            <option value="경기남양주">경기도 남양주시</option>
+            <option value="경기구리">경기도 구리시</option>
+            <option value="경기고양">경기도 고양시</option>
+            <option value="부산">부산광역시</option>
+            <option value="대구">대구광역시</option>
+            <option value="대전">대전광역시</option>
+            <option value="광주">광주광역시</option>
+            <option value="울산">울산광역시</option>
+            <option value="세종">세종특별자치시</option>
+            <option value="강원원주">강원도 원주시</option>
+            <option value="충북청주">충청북도 청주시</option>
+            <option value="충남천안">충청남도 천안시</option>
+            <option value="전북전주">전라북도 전주시</option>
+            <option value="전남여수">전라남도 여수시</option>
+            <option value="경북구미">경상북도 구미시</option>
+            <option value="경남창원">경상남도 창원시</option>
+            <option value="제주">제주특별자치도</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="diag-industry">주요 업종</label>
+          <select id="diag-industry">
+            <option value="제조">제조업 및 ICT융합기술</option>
+            <option value="정보통신">IT, 소프트웨어 및 정보서비스업</option>
+            <option value="도소매">도소매 및 유통 서비스업</option>
+            <option value="건설">건설 및 부동산 개발업</option>
+            <option value="기타">기타 일반 서비스 및 특수 업종</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="diag-history">업력 년수</label>
+          <select id="diag-history">
+            <option value="3미만">창업 3년 미만 (초기 기업)</option>
+            <option value="7미만">창업 3년 이상 ~ 7년 미만 (성장 기업)</option>
+            <option value="7이상">창업 7년 이상 (중견/도약 기업)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="diag-sales">연평균 매출액 (최근 기준)</label>
+          <select id="diag-sales">
+            <option value="1억">1억 원 미만</option>
+            <option value="5억">1억 원 이상 ~ 5억 원 미만</option>
+            <option value="15억">5억 원 이상 ~ 15억 원 미만</option>
+            <option value="50억">15억 원 이상 ~ 50억 원 미만</option>
+            <option value="50억이상">50억 원 이상</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="diag-credit">대표자 또는 기업 신용등급 등급대 (추정)</label>
+          <select id="diag-credit">
+            <option value="상">1등급 ~ 3등급 이내 (우수)</option>
+            <option value="중">4등급 ~ 6등급 이내 (보통)</option>
+            <option value="하">7등급 이하 (주의 요망)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="diag-patent">특허 또는 벤처기업 인증 유무</label>
+          <select id="diag-patent">
+            <option value="유">보유하고 있음 (벤처인증/메인비즈 등)</option>
+            <option value="무">보유하고 있지 않음</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button type="button" class="cta-button" style="border: none; cursor: pointer;" onclick="runSelfDiagnosis()">자가진단 결과 보기</button>
+      </div>
+
+      <div id="diag-result" class="result-box" style="display: none;">
+        <h3 id="result-title" style="margin-top: 0; color: #0f766e;"></h3>
+        <p id="result-description"></p>
+        <p id="result-tip" style="font-weight: 500; color: #1e293b;"></p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function runSelfDiagnosis() {
+      const region = document.getElementById('diag-region').value;
+      const industry = document.getElementById('diag-industry').value;
+      const history = document.getElementById('diag-history').value;
+      const sales = document.getElementById('diag-sales').value;
+      const credit = document.getElementById('diag-credit').value;
+      const patent = document.getElementById('diag-patent').value;
+      
+      let score = 0;
+      let targetFund = "";
+      
+      if (industry === "제조" || industry === "정보통신") score += 30;
+      else score += 15;
+      
+      if (history === "3미만") {
+        score += 20;
+        targetFund = "청년창업전용자금 및 혁신창업지원자금";
+      } else if (history === "7미만") {
+        score += 25;
+        targetFund = "투융자 복합금융 및 창업기반지원자금";
+      } else {
+        score += 15;
+        targetFund = "신시장진출지원자금 및 신성장기반자금";
+      }
+      
+      if (credit === "상") score += 25;
+      else if (credit === "중") score += 15;
+      else score += 5;
+      
+      if (patent === "유") score += 20;
+      
+      const resultBox = document.getElementById('diag-result');
+      const resultTitle = document.getElementById('result-title');
+      const resultDesc = document.getElementById('result-description');
+      const resultTip = document.getElementById('result-tip');
+      
+      resultBox.style.display = "block";
+      
+      if (score >= 70) {
+        resultTitle.textContent = "진단 결과: 조달 승인 가능성 매우 우수 (상위 군)";
+        resultDesc.textContent = "선택하신 기업의 요건은 " + targetFund + " 융자 요건에 아주 부합합니다. 특히 " + region + " 지역 예산 배정에 따라 우선적으로 자금 신청을 진행할 수 있는 핵심 요건을 갖추고 있습니다. 평균 조달 금리는 기준 금리 부근의 저렴한 요율로 책정될 확률이 매우 높으며, 적극적인 심사 신청을 추천해 드립니다.";
+        resultTip.textContent = "가장 우선적으로 신청 서류 확보 단계를 밟으셔야 하며, 가점 항목 극대화를 위해 특허 및 기업부설연구소 등의 등록 실무를 선제적으로 보완하시는 것이 좋습니다.";
+      } else if (score >= 45) {
+        resultTitle.textContent = "진단 결과: 조달 준비 요망 및 정밀 분석 대상 (중간 군)";
+        resultDesc.textContent = "조건상 기본 자격에는 해당되나, 신용 관리 점수 또는 매출 규모 측면에서 미세한 서류 보완이 수반되어야 합니다. " + region + "의 담당 본부별 심사 한도가 조기에 마감될 수 있으므로 사전에 정교하게 다듬어진 사업계획서를 준비하여 다이렉트 온라인 자격 체크를 활용하시는 것을 권장합니다.";
+        resultTip.textContent = "부채비율을 사전에 조율하거나 기업의 핵심 원천기술에 대한 장점과 가치를 담은 정밀 사업계획서 대행 지도를 받는 방향이 자금 확보 성공률을 높이는 지름길입니다.";
+      } else {
+        resultTitle.textContent = "진단 결과: 사전 자격 요건 미달 주의 (부결 관리군)";
+        resultDesc.textContent = "대표자의 현재 추정 신용평가나 업종 비율에서 중진공 규정에 따른 차이점이 발생하여 이 상태 그대로의 무담보 다이렉트 자금 신청 시에는 반려 혹은 부결될 위험성이 농후합니다. 현시점에서는 섣부른 신청보다는 재무제표 보정과 보완 작업이 선행되어야 합니다.";
+        resultTip.textContent = "기업의 최근 년도 가결산 내용을 분석하여 부채비율을 개선한 후, 신규 재도약지원금 종류나 우대조건이 적용되는 대체 보증서 대출 브랜드와의 비교 평가를 거쳐 안전하게 진입해야 합니다.";
+      }
+      
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+  <section id="상환계산">
+    <h2>금리 변동 및 원리금 상환 시뮬레이션 계산기</h2>
+    <p>
+      중진공정책자금의 예상 이자율과 희망 조달 금액을 바탕으로 매달 납부해야 할 이자 비용 및 원금을 산정할 수 있는 계산기입니다. 거치 기간 이후 발생하는 상환액 추이를 시각화하여 사업의 현금 흐름 계획을 안전하게 세워 보십시오.
+    </p>
+    
+    <div class="interactive-box">
+      <div class="interactive-grid">
+        <div class="form-group">
+          <label for="calc-amount">목표 조달 희망 금액 (단위: 만 원)</label>
+          <input type="number" id="calc-amount" value="10000" placeholder="예: 1억 원은 10000 입력">
+        </div>
+        
+        <div class="form-group">
+          <label for="calc-rate">예상 연 금리 (단위: 퍼센트 %)</label>
+          <input type="number" id="calc-rate" value="3.5" step="0.1" placeholder="예: 3.5">
+        </div>
+
+        <div class="form-group">
+          <label for="calc-period">전체 융자 기간</label>
+          <select id="calc-period">
+            <option value="36">3년 (36개월)</option>
+            <option value="60">5년 (60개월)</option>
+            <option value="120">10년 (120개월)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="calc-grace">이외 거치 기간 (이자만 납부하는 기간)</label>
+          <select id="calc-grace">
+            <option value="12">1년 (12개월)</option>
+            <option value="24">2년 (24개월)</option>
+            <option value="0">거치 기간 없음 (즉시 상환)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button type="button" class="cta-button" style="border: none; cursor: pointer; background-color: #0f766e;" onclick="calculateLoan()">월별 원리금 모의 계산하기</button>
+      </div>
+
+      <div id="loan-result" class="result-box" style="display: none;">
+        <h3 style="margin-top: 0; color: #115e59;">원리금 납입 계획 진단 내역</h3>
+        <p>
+          입력하신 총액을 기준으로 책정된 초기 거치 기간의 이자액과 거치 종료 후 매월 납입이 예상되는 원금과 이자의 합계 내역입니다. 본 계산식은 원금 균등 분할 상환 방식을 기초로 산출되었으며, 실시간 심사 금리와 조달 방식에 따라 미세한 수치 차이가 존재할 수 있습니다.
+        </p>
+        <div class="interactive-grid" style="margin-top: 15px;">
+          <div>
+            <p><strong>총 거치기간 월 이자:</strong> <span id="grace-interest" style="color: #f97316; font-weight: 700;"></span></p>
+            <p><strong>거치 이후 1회차 원리금:</strong> <span id="first-repayment" style="color: #0f766e; font-weight: 700;"></span></p>
+          </div>
+          <div>
+            <p><strong>조달 예상 금액 대비 총 이자 합계:</strong> <span id="total-interest" style="color: #475569; font-weight: 600;"></span></p>
+            <p><strong>최종 상환 만기까지의 총액:</strong> <span id="total-payment" style="color: #1e293b; font-weight: 700;"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function calculateLoan() {
+      const amountWan = parseFloat(document.getElementById('calc-amount').value);
+      const annualRate = parseFloat(document.getElementById('calc-rate').value) / 100;
+      const totalMonths = parseInt(document.getElementById('calc-period').value);
+      const graceMonths = parseInt(document.getElementById('calc-grace').value);
+      
+      if (isNaN(amountWan) || amountWan <= 0 || isNaN(annualRate) || annualRate <= 0) {
+        alert("원활한 계산을 위해 정확한 금액과 연 이자율 수치를 정확하게 기입해 주시기 바랍니다.");
+        return;
+      }
+      
+      const principal = amountWan * 10000;
+      const monthlyRate = annualRate / 12;
+      
+      const monthlyGraceInterest = Math.round(principal * monthlyRate);
+      
+      const repaymentMonths = totalMonths - graceMonths;
+      const monthlyPrincipal = principal / repaymentMonths;
+      
+      let totalInterestSum = 0;
+      let tempPrincipal = principal;
+      
+      if (graceMonths > 0) {
+        totalInterestSum += monthlyGraceInterest * graceMonths;
+      }
+      
+      for (let i = 0; i < repaymentMonths; i++) {
+        let currentMonthInterest = tempPrincipal * monthlyRate;
+        totalInterestSum += currentMonthInterest;
+        tempPrincipal -= monthlyPrincipal;
+      }
+      
+      const firstRepaymentAmount = Math.round(monthlyPrincipal + (principal * monthlyRate));
+      const totalPaidSum = principal + totalInterestSum;
+      
+      document.getElementById('grace-interest').textContent = formatKRW(monthlyGraceInterest) + " 원";
+      document.getElementById('first-repayment').textContent = formatKRW(firstRepaymentAmount) + " 원";
+      document.getElementById('total-interest').textContent = formatKRW(Math.round(totalInterestSum)) + " 원";
+      document.getElementById('total-payment').textContent = formatKRW(Math.round(totalPaidSum)) + " 원";
+      
+      const loanResult = document.getElementById('loan-result');
+      loanResult.style.display = "block";
+      loanResult.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function formatKRW(num) {
+      return num.toString().replace(/\B(?=(\d3)+(?!\d))/g, ",");
+    }
+  </script>
+
+  <section id="분석표">
+    <h2>중진공정책자금 종류 및 대행 컨설팅과의 차이점 분석</h2>
+    <p>
+      2026년 기준으로 신청 대상이 되는 주요 자금 세부 브랜드의 종류와 특징을 일목요연하게 정리하였습니다. 다이렉트로 신청하는 방식과 전문 컨설팅 업체를 경유해 승인 전략을 기획하는 방안 간의 명확한 장단점을 비교해 보십시오.
+    </p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>정부 정책자금 종류</th>
+          <th>주요 지원 대상 및 목적</th>
+          <th>상한 한도 수준</th>
+          <th>평균 적용 약정금리</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>청년창업전용자금</td>
+          <td>대표자 만 39세 이하 및 업력 3년 미만 스타트업</td>
+          <td>최대 1억 원 이내</td>
+          <td>연 2.5 퍼센트 내외 고정금리 우대</td>
+        </tr>
+        <tr>
+          <td>신시장진출지원자금</td>
+          <td>수출 실적 보유 기업 또는 내수 탈피 강소기업</td>
+          <td>최대 10억 원 이상</td>
+          <td>기준금리 대비 차감 우대 적용</td>
+        </tr>
+        <tr>
+          <td>신성장기반자금</td>
+          <td>제조 공장 신축, 고가 장비 도입 및 기술 설비 투자</td>
+          <td>최대 100억 원 한도 범위</td>
+          <td>분기별 변동금리 체계 적용</td>
+        </tr>
+        <tr>
+          <td>긴급경영안정자금</td>
+          <td>자연재해, 원자재 수급 불안정 등으로 인한 일시적 애로</td>
+          <td>최대 10억 원 이내</td>
+          <td>재해 복구 목적 고정 저리 우대</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>직접 직접신청 vs 외주 전문 업체 컨설팅 비교 분석</h3>
+    <p>
+      각 선택 방안의 장단점과 효율성을 객관적으로 명기하였으므로, 기업의 여건에 맞춤한 길을 선택해 진행해 보시기 바랍니다.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>구분 구분지표</th>
+          <th>온라인 다이렉트 신청 방식 (직접 자력 해결)</th>
+          <th>전문 컨설팅 자문 업체 동행 방식 (대행 설계)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>장점 요인</td>
+          <td>별도의 성공 보수나 착수금 같은 부가 대행료 소모 없음</td>
+          <td>정확한 서류 준비로 부결 확률 제어, 신속한 승인 대응</td>
+        </tr>
+        <tr>
+          <td>단점 요인</td>
+          <td>서류 미비 및 계획서 부실 작성으로 인한 6개월 신청 제한 위험</td>
+          <td>착수 대행금 또는 자문 성공 시 일정 비율의 수수료 비용 발생</td>
+        </tr>
+        <tr>
+          <td>평균 소요 시간</td>
+          <td>평균 2개월 이상 서류 준비 및 여러 차례 보완 요강 통보</td>
+          <td>자문 설계 계약 체결 이후 약 3주 내외로 최종 접수 완성</td>
+        </tr>
+        <tr>
+          <td>이용 추천 대상</td>
+          <td>사내에 경영지도사나 재무 전문가가 자체 상주하는 강소기업</td>
+          <td>경영 연구소 부재로 인적 자원이 부족한 창업주 및 중소상공인</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="chart-container">
+      <h3>2026년 중진공정책자금 주요 자금 분야별 예산 비중 배정 비율 (추정 현황)</h3>
+      <p>
+        신산업 창업 및 설비 투자를 중심으로 다채로운 금융 지원금이 분배되어 있으며, 지역 센터별 한도 마감 추이를 예측하는데 필수적인 참고 데이터입니다.
+      </p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">창업기반 지원자금</div>
+          <div class="bar-wrapper"><div class="bar-fill" style="width: 35%;"></div></div>
+          <div class="bar-value">35 퍼센트</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">신성장기반 시설자금</div>
+          <div class="bar-wrapper"><div class="bar-fill" style="width: 30%;"></div></div>
+          <div class="bar-value">30 퍼센트</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">신시장 수출운전자금</div>
+          <div class="bar-wrapper"><div class="bar-fill" style="width: 20%;"></div></div>
+          <div class="bar-value">20 퍼센트</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">재도약 및 긴급자금</div>
+          <div class="bar-wrapper"><div class="bar-fill" style="width: 15%;"></div></div>
+          <div class="bar-value">15 퍼센트</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="정보성분석">
+    <h2>전국 지자체 및 커뮤니티 트렌드 분석을 통한 심사 준비 방침</h2>
+    
+    <h3>전국 주요 거점 지부별 융자 집행 특징</h3>
+    <p>
+      중소벤처기업진흥공단은 전국 각 지역 거점별로 별도의 예산 심의실을 운영하고 있습니다. 서울본부와 경기북부지부(남양주, 구리, 의정부, 고양, 파주)를 포괄하는 수도권 권역은 상시 접수 시 엄청난 경쟁자가 몰려 한도가 가장 먼저 고갈되는 대표적인 권역입니다. 반면 인천지역본부, 대전세종지역본부, 충남지역본부(천안, 아산), 충북지역본부(청주, 충주), 경북지역본부(구미, 포항, 안동, 경주), 대구지역본부, 부산지역본부, 경남지역본부(창원, 김해, 양산), 울산지역본부, 광주지역본부, 전남지역본부(여수, 목포, 순천), 전북지역본부(전주, 군산, 익산), 강원지역본부(춘천, 원주, 강릉), 제주지역본부 등은 각 지자체 특화 육성 산업군(스마트 팩토리, 신소재 제조, 조선 기자재, 신재생 에너지, 관광 벤처)에 해당할 경우, 추가적인 보증 가점이나 심사 가산점을 주기적으로 부여하는 등의 정책적 차이점을 드러내고 있습니다.
+    </p>
+
+    <h3>온라인 커뮤니티(디시, 보배드림, 에펨코리아) 및 SNS를 통한 정보 습득 실태</h3>
+    <p>
+      최근 많은 창업자들이 중진공정책자금 신청 전, 디시인사이드 중소기업 갤러리나 보배드림, 펨코, 에펨코리아 등의 유명 인터넷 커뮤니티 사이트에서 이른바 내돈내산으로 대행 솔루션을 이용한 실제 성공 및 실패 후기를 검색해 보는 트렌드를 형성하고 있습니다. 일부 커뮤니티 게시글에서는 불법 브로커나 자격이 미달되는 경영 지도 외주 컨설팅 업체를 만나 아무런 혜택이나 사은 지원을 얻지 못하고 계약서상의 고액 선임료만 떼였다는 부작용 사례도 빈번히 보고되고 있습니다. 따라서 사은품, 현금지원, 지원금, 상품권, 파격 사은 혜택 등의 과장 광고나 거짓 이벤트 문구를 앞세우는 정체불명의 대행사보다는 다이렉트 자격 조건 및 금리 우대 비교가 투명한 공인된 전문 업체를 우선적으로 추천하며 신중하게 가입을 타진하셔야 합니다.
+    </p>
+
+    <h3>인공지능(AI) 솔루션과 메신저 플랫폼을 활용한 첨단 정책 분석</h3>
+    <p>
+      2026년 현재는 단순 네이버 검색이나 유튜브, 인스타그램, 페이스북 동영상 지침을 수집하는 것을 뛰어넘어, 챗지피티(ChatGPT), 제미나이(Gemini) 등의 첨단 인공지능(AI) 플랫폼에 자사의 재무 비재무 데이터를 대입해 직접 매칭 분석을 수행해 보는 얼리어답터 기업주들이 급격히 늘어났습니다. 카카오톡 인공지능 비서 앱이나 토스(Toss)와 같은 자산 관리 모바일 어플에서도 정부 정책 추천 서비스를 상시 지원하며, 개별 기업은 굳이 복잡한 지침서를 100 퍼센트 모두 직접 정독하지 않더라도 지능형 검색 에이전트를 매개 삼아 자사에 부합하는 가점 유형이 무엇인지를 단 몇 초 안에 진단해 낼 수 있는 놀라운 시대가 도래하였습니다.
+    </p>
+  </section>
+
+  <section id="자주묻는질문">
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <div class="faq-item">
+      <div class="faq-question">Q1. 중진공정책자금 평균 승인 금액과 한도는 얼마 수준인가요?</div>
+      <div class="faq-answer">
+        기업의 매출 규모, 업종, 담보 능력 유무에 따라 편차가 크지만, 일반적인 운전자금 기준으로는 평균 1억 원에서 3억 원 범위 내에서 가장 많이 실행됩니다. 제조업 영위 기업이나 특허 기술을 보유한 우수 기업의 시설 투자인 경우 예외적으로 10억 원에서 50억 원을 상회하는 대규모 정책 자금 금액 승인도 기대해 볼 수 있습니다.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Q2. 자력 다이렉트 신청 시 심사에서 부결되는 가장 잦은 원인은 무엇입니까?</div>
+      <div class="faq-answer">
+        가장 주된 사유는 세무 관련 국세 및 지방세 체납, 과도한 기존 대출 잔액 및 자본 잠식에 따른 부채비율 초과, 업종 불일치, 그리고 대표자 개인의 지나치게 낮게 하향 조정된 신용등급 등이 해당됩니다. 더불어 사업계획서에서 기술성 및 지속 가능성에 대한 타당성 증명이 미흡할 경우에도 허가 승인 반려가 날 수 있습니다.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Q3. 정부 융자 상담 지원에 수수료를 과하게 청구하는 대행업체는 피해야 하나요?</div>
+      <div class="faq-answer">
+        정식 행정 및 조율 자문 자격이 없는 이른바 제3자 불법 금융 브로커 계약은 불법이며 중진공 규정상 엄격하게 금지되어 있습니다. 기업의 합법적인 권리를 지키기 위해서는 성공 보수 중심의 부당한 수수료 요율을 요구하는 유령 브랜드 업체를 절대 피해야 하며, 정상적인 비즈니스 사업 평가 및 재무 구조 건전화 지도를 정식으로 수임하는 공인 컨설턴트나 세무 법인 등의 전문 파트너와 안전하게 협조하셔야 합니다.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Q4. 2026년 우대 금리 할인 및 추가적인 정책적 지원 조건은 무엇이 있나요?</div>
+      <div class="faq-answer">
+        2026년도 개편 지침에 따라 일자리 창출 실적이 뛰어난 청년 고용 우수 기업, 친환경 및 저탄소 ESG 경영 실천 기업, 수출 초보에서 유망으로 진입한 내수 극복 우수 벤처의 경우, 기본 결정 약정 이율에서 추가적인 가중 인하율이 반영되어 최저 수준의 비용으로 사업 자금 활용 혜택을 온전히 수혜받을 수 있습니다.
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const isVisible = answer.style.display === 'block';
+        
+        document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+        
+        answer.style.display = isVisible ? 'none' : 'block';
+      });
+    });
+  </script>
+
+  <section id="정밀신청폼">
+    <h2>1대1 맞춤형 무료 사전 정밀 진단 신청하기</h2>
+    <p>
+      2026년 상반기 및 하반기 각 지역 거점별 융자 예산이 완전히 고갈되기 전에, 무담보 직접 융자의 자격 요건을 진단받고 통과 전략을 무료로 컨설팅해 드리는 상주 전담팀에 정식 비대면 문의를 전송하십시오. 아래 양식을 구체적으로 채워 주실수록 보다 정확도 높은 예상 견적과 정책 가이드를 제공받으실 수 있습니다.
+    </p>
+    
+    <form action="#" method="POST" onsubmit="alert('정밀 자격 심사 데이터가 정상 접수되었습니다. 담당 센터의 전문 수석 컨설턴트가 24시간 이내에 유선 또는 이메일로 회신해 드리겠습니다.'); return false;">
+      <div class="interactive-grid">
+        <div class="form-group">
+          <label for="company-name">업체명 (법인 또는 개인사업자)</label>
+          <input type="text" id="company-name" required placeholder="예: 주식회사 한국미래텍">
+        </div>
+        
+        <div class="form-group">
+          <label for="ceo-name">대표자 성함</label>
+          <input type="text" id="ceo-name" required placeholder="예: 홍길동">
+        </div>
+
+        <div class="form-group">
+          <label for="phone-number">상담 전용 연락처</label>
+          <input type="tel" id="phone-number" required placeholder="예: 010-1234-5678" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}">
+        </div>
+
+        <div class="form-group">
+          <label for="email-address">회신 이메일 주소</label>
+          <input type="text" id="email-address" required placeholder="예: support@yourdomain.kr">
+        </div>
+
+        <div class="form-group">
+          <label for="est-sales">최근 1년 매출액 추이</label>
+          <select id="est-sales">
+            <option value="none">아직 매출 없음 (완전 초기 신규 기업)</option>
+            <option value="under5">5억 원 미만</option>
+            <option value="under20">5억 원 이상 ~ 20억 원 미만</option>
+            <option value="over20">20억 원 이상</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="target-money">희망 필요 자금 금액 (원하는 융자 한도)</label>
+          <select id="target-money">
+            <option value="1">1억 원 미만 (주로 청년 전용 및 혁신 창업)</option>
+            <option value="3">1억 원 이상 ~ 3억 원 이하 (운전자금 기본 범위)</option>
+            <option value="5">3억 원 이상 ~ 5억 원 이하</option>
+            <option value="10">5억 원 이상 (제조업 기계 및 시설 투자 포함)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="biz-details">현재 겪고 계신 재무 애로사항 및 사업 아이템 핵심 요약</label>
+        <textarea id="biz-details" rows="5" placeholder="현재 보유 중인 특허 사항이나 남양주, 구미, 부산 등 특정 지역 가점 우대 해당 사항이 있으신지 간략하게 적어 주시면 한층 유리한 방향으로 추천 포트폴리오를 제공해 드립니다."></textarea>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <button type="submit" class="cta-button" style="border: none; cursor: pointer;">맞춤 상담 무료 접수하기</button>
+      </div>
+    </form>
+  </section>
+
+</div>
+
+<div class="external-links">
+  <strong>신뢰할 수 있는 공식 행정 및 금융 지원 처처 안내:</strong>
+  <a href="https://loanforbusinessi.koreahankang.com" target="_blank" rel="noopener noreferrer">정부 정책자금 맞춤형 종합 진단 채널</a> |
+  <a href="https://www.kosme.or.kr" target="_blank" rel="noopener noreferrer">중소벤처기업진흥공단 공식 포털</a> |
+  <a href="https://www.mss.go.kr" target="_blank" rel="noopener noreferrer">중소벤처기업부 공식 누리집</a> |
+  <a href="https://namu.wiki/w/중소벤처기업진흥공단" target="_blank" rel="noopener noreferrer">나무위키 중진공 상세 백과</a> |
+  <a href="https://www.bizinfo.go.kr" target="_blank" rel="noopener noreferrer">중소기업 기업마당 정책포털</a>
+</div>
+
+  
